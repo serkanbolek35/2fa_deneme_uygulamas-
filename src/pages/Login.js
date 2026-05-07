@@ -21,21 +21,24 @@ export default function Login() {
     e.stopPropagation();
     setError("");
     setLoading(true);
+    // Önce true set et ki onAuthStateChanged tetiklenince dashboard'a gitmesin
+    setAwaitingTwoFA(true);
     try {
       const result = await login(email, password);
       const ref = doc(db, "users", result.user.uid);
       const snap = await getDoc(ref);
 
       if (snap.exists() && snap.data().twoFAEnabled) {
-        setAwaitingTwoFA(true);
         setSecret(snap.data().twoFASecret);
         setShow2FA(true);
         setLoading(false);
       } else {
+        // 2FA yok, direkt geç
         setAwaitingTwoFA(false);
         navigate("/dashboard");
       }
     } catch (err) {
+      setAwaitingTwoFA(false);
       const messages = {
         "auth/user-not-found": "Bu e-posta ile kayıtlı kullanıcı bulunamadı.",
         "auth/wrong-password": "Şifre yanlış, tekrar deneyin.",

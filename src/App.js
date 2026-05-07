@@ -15,8 +15,10 @@ function PrivateRoute({ children }) {
 
 function PublicRoute({ children }) {
   const { currentUser, awaitingTwoFA } = useAuth();
-  if (!currentUser || awaitingTwoFA) return children;
-  return <Navigate to="/dashboard" />;
+  // Kullanıcı giriş yapmış VE 2FA beklemiyor → dashboard'a gönder
+  if (currentUser && !awaitingTwoFA) return <Navigate to="/dashboard" />;
+  // Diğer tüm durumlar (giriş yok, veya 2FA bekleniyor) → login'de kal
+  return children;
 }
 
 function App() {
