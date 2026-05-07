@@ -17,6 +17,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [awaitingTwoFA, setAwaitingTwoFA] = useState(false);
 
   function register(email, password, displayName) {
     return createUserWithEmailAndPassword(auth, email, password).then((res) =>
@@ -29,6 +30,7 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
+    setAwaitingTwoFA(false);
     return signOut(auth);
   }
 
@@ -40,7 +42,7 @@ export function AuthProvider({ children }) {
     return unsubscribe;
   }, []);
 
-  const value = { currentUser, register, login, logout };
+  const value = { currentUser, register, login, logout, awaitingTwoFA, setAwaitingTwoFA };
 
   return (
     <AuthContext.Provider value={value}>

@@ -7,13 +7,16 @@ import Dashboard from "./pages/Dashboard";
 import "./App.css";
 
 function PrivateRoute({ children }) {
-  const { currentUser } = useAuth();
-  return currentUser ? children : <Navigate to="/login" />;
+  const { currentUser, awaitingTwoFA } = useAuth();
+  if (!currentUser) return <Navigate to="/login" />;
+  if (awaitingTwoFA) return <Navigate to="/login" />;
+  return children;
 }
 
 function PublicRoute({ children }) {
-  const { currentUser } = useAuth();
-  return !currentUser ? children : <Navigate to="/dashboard" />;
+  const { currentUser, awaitingTwoFA } = useAuth();
+  if (!currentUser || awaitingTwoFA) return children;
+  return <Navigate to="/dashboard" />;
 }
 
 function App() {

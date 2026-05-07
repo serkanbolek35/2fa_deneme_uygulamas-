@@ -13,7 +13,7 @@ export default function Login() {
   const [show2FA, setShow2FA] = useState(false);
   const [twoFACode, setTwoFACode] = useState("");
   const [secret, setSecret] = useState("");
-  const { login } = useAuth();
+  const { login, setAwaitingTwoFA } = useAuth();
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
@@ -29,6 +29,7 @@ export default function Login() {
       console.log("snap data:", snap.data());
 
       if (snap.exists() && snap.data().twoFAEnabled) {
+        setAwaitingTwoFA(true);
         setSecret(snap.data().twoFASecret);
         setShow2FA(true);
         setLoading(false);
@@ -52,6 +53,7 @@ export default function Login() {
     const totp = new OTPAuth.TOTP({ secret: secret, digits: 6 });
     const delta = totp.validate({ token: twoFACode, window: 1 });
     if (delta !== null) {
+      setAwaitingTwoFA(false);
       navigate("/dashboard");
     } else {
       setError("Kod yanlış, tekrar dene.");
