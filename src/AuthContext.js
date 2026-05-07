@@ -17,7 +17,14 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [awaitingTwoFA, setAwaitingTwoFA] = useState(false);
+  const [awaitingTwoFA, setAwaitingTwoFAState] = useState(
+    () => sessionStorage.getItem("awaitingTwoFA") === "true"
+  );
+
+  function setAwaitingTwoFA(val) {
+    sessionStorage.setItem("awaitingTwoFA", val ? "true" : "false");
+    setAwaitingTwoFAState(val);
+  }
 
   function register(email, password, displayName) {
     return createUserWithEmailAndPassword(auth, email, password).then((res) =>

@@ -18,15 +18,13 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    e.stopPropagation();
     setError("");
     setLoading(true);
     try {
       const result = await login(email, password);
-      console.log("UID:", result.user.uid);
       const ref = doc(db, "users", result.user.uid);
       const snap = await getDoc(ref);
-      console.log("snap exists:", snap.exists());
-      console.log("snap data:", snap.data());
 
       if (snap.exists() && snap.data().twoFAEnabled) {
         setAwaitingTwoFA(true);
@@ -34,6 +32,7 @@ export default function Login() {
         setShow2FA(true);
         setLoading(false);
       } else {
+        setAwaitingTwoFA(false);
         navigate("/dashboard");
       }
     } catch (err) {
@@ -60,6 +59,10 @@ export default function Login() {
     }
   }
 
+  function handleKeyDown(e) {
+    if (e.key === "Enter") verify2FA();
+  }
+
   if (show2FA) {
     return (
       <div className="auth-container">
@@ -79,6 +82,8 @@ export default function Login() {
                 maxLength={6}
                 value={twoFACode}
                 onChange={(e) => setTwoFACode(e.target.value)}
+                onKeyDown={handleKeyDown}
+                autoFocus
                 style={{letterSpacing:"0.2em", fontFamily:"monospace", fontSize:"1.2rem", textAlign:"center"}}
               />
             </div>
