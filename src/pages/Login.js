@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import { authenticator } from "otplib";
+import * as OTPLib from "otplib";
+const authenticator = OTPLib.authenticator;
 
 export default function Login() {
   const [email, setEmail] = useState("");

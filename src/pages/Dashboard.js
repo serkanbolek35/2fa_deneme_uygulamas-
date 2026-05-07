@@ -3,7 +3,8 @@ import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import { authenticator } from "otplib";
+import * as OTPLib from "otplib";
+const authenticator = OTPLib.authenticator;
 import QRCode from "qrcode";
 
 export default function Dashboard() {
