@@ -22,8 +22,11 @@ export default function Login() {
     setLoading(true);
     try {
       const result = await login(email, password);
+      console.log("UID:", result.user.uid);
       const ref = doc(db, "users", result.user.uid);
       const snap = await getDoc(ref);
+      console.log("snap exists:", snap.exists());
+      console.log("snap data:", snap.data());
 
       if (snap.exists() && snap.data().twoFAEnabled) {
         setSecret(snap.data().twoFASecret);
