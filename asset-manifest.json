@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/2fa_deneme_uygulamas-/static/css/main.91d3042b.css",
-    "main.js": "/2fa_deneme_uygulamas-/static/js/main.0611bfce.js",
+    "main.js": "/2fa_deneme_uygulamas-/static/js/main.cf383afe.js",
     "static/js/453.1eb07452.chunk.js": "/2fa_deneme_uygulamas-/static/js/453.1eb07452.chunk.js",
     "index.html": "/2fa_deneme_uygulamas-/index.html",
     "main.91d3042b.css.map": "/2fa_deneme_uygulamas-/static/css/main.91d3042b.css.map",
-    "main.0611bfce.js.map": "/2fa_deneme_uygulamas-/static/js/main.0611bfce.js.map",
+    "main.cf383afe.js.map": "/2fa_deneme_uygulamas-/static/js/main.cf383afe.js.map",
     "453.1eb07452.chunk.js.map": "/2fa_deneme_uygulamas-/static/js/453.1eb07452.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.91d3042b.css",
-    "static/js/main.0611bfce.js"
+    "static/js/main.cf383afe.js"
   ]
 }
