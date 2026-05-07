@@ -1,15 +1,13 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
-// 🔧 BURAYA KENDİ FIREBASE YAPILANDIRMANIZI GİRİN
-// Firebase Console > Project Settings > Your apps > SDK Setup
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyDENKkcS1VZu9-L05Rdxl5nY6aUn6SkDnk",
+  authDomain: "deneme-8a625.firebaseapp.com",
+  projectId: "deneme-8a625",
+  storageBucket: "deneme-8a625.firebasestorage.app",
+  messagingSenderId: "619728243691",
+  appId: "1:619728243691:web:c31a9dd97b1d606c4667ae"
 };
 
 const app = initializeApp(firebaseConfig);
