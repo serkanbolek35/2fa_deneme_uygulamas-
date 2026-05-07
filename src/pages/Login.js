@@ -3,8 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import * as OTPLib from "otplib";
-const authenticator = OTPLib.authenticator;
+import * as OTPAuth from "otpauth";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -47,8 +46,9 @@ export default function Login() {
   }
 
   function verify2FA() {
-    const isValid = authenticator.verify({ token: twoFACode, secret });
-    if (isValid) {
+    const totp = new OTPAuth.TOTP({ secret: secret, digits: 6 });
+    const delta = totp.validate({ token: twoFACode, window: 1 });
+    if (delta !== null) {
       navigate("/dashboard");
     } else {
       setError("Kod yanlış, tekrar dene.");

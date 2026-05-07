@@ -3,8 +3,7 @@ import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import * as OTPLib from "otplib";
-const authenticator = OTPLib.authenticator;
+import * as OTPAuth from "otpauth";
 import QRCode from "qrcode";
 
 export default function Dashboard() {
@@ -37,13 +36,14 @@ export default function Dashboard() {
   }
 
   async function setup2FA() {
-    const newSecret = authenticator.generateSecret();
+    const totp = new OTPAuth.TOTP({
+      issuer: "MyApp",
+      label: currentUser.email,
+      digits: 6,
+    });
+    const newSecret = totp.secret.base32;
     setSecret(newSecret);
-    const otpauth = authenticator.keyuri(
-      currentUser.email,
-      "MyApp",
-      newSecret
-    );
+    const otpauth = totp.toString();
     const url = await QRCode.toDataURL(otpauth);
     setQrUrl(url);
     setShowSetup(true);
@@ -51,12 +51,10 @@ export default function Dashboard() {
   }
 
   async function verify2FA() {
-    const isValid = authenticator.verify({
-      token: verifyCode,
-      secret: secret,
-    });
+    const totp = new OTPAuth.TOTP({ secret: secret, digits: 6 });
+    const delta = totp.validate({ token: verifyCode, window: 1 });
 
-    if (isValid) {
+    if (delta !== null) {
       await setDoc(doc(db, "users", currentUser.uid), {
         twoFAEnabled: true,
         twoFASecret: secret,
