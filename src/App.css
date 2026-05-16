@@ -285,3 +285,20 @@ body {
   font-weight: 500;
   color: var(--text);
 }
+
+/* ── SIFRE KURALLARI ── */
+.password-rules {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-top: -0.5rem;
+}
+
+/* ── GUVENLIK BILGI KUTUSU ── */
+.security-info-box {
+  background: rgba(108,99,255,0.05);
+  border: 1px solid rgba(108,99,255,0.2);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
