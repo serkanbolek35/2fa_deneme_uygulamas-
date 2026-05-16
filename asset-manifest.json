@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/2fa_deneme_uygulamasi/static/css/main.91d3042b.css",
-    "main.js": "/2fa_deneme_uygulamasi/static/js/main.d37cecb5.js",
+    "main.css": "/2fa_deneme_uygulamasi/static/css/main.0debb47d.css",
+    "main.js": "/2fa_deneme_uygulamasi/static/js/main.2091edf5.js",
     "static/js/453.1eb07452.chunk.js": "/2fa_deneme_uygulamasi/static/js/453.1eb07452.chunk.js",
+    "static/media/guvenlik.jpg": "/2fa_deneme_uygulamasi/static/media/guvenlik.3651b3895c32a6fa7ab9.jpg",
     "index.html": "/2fa_deneme_uygulamasi/index.html",
-    "main.91d3042b.css.map": "/2fa_deneme_uygulamasi/static/css/main.91d3042b.css.map",
-    "main.d37cecb5.js.map": "/2fa_deneme_uygulamasi/static/js/main.d37cecb5.js.map",
+    "main.0debb47d.css.map": "/2fa_deneme_uygulamasi/static/css/main.0debb47d.css.map",
+    "main.2091edf5.js.map": "/2fa_deneme_uygulamasi/static/js/main.2091edf5.js.map",
     "453.1eb07452.chunk.js.map": "/2fa_deneme_uygulamasi/static/js/453.1eb07452.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.91d3042b.css",
-    "static/js/main.d37cecb5.js"
+    "static/css/main.0debb47d.css",
+    "static/js/main.2091edf5.js"
   ]
 }
